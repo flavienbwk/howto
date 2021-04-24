@@ -39,7 +39,11 @@ Then run setup.py with `sdist` to build a source distribution and `bdist_wheel` 
 python3 setup.py sdist bdist_wheel
 twine check dist/*
 
-twine upload dist/*
+# For test / pre-release
+twine upload -r testpypi dist/*
+
+# For production
+twine upload -r pypi dist/*
 ```
 
 ## Build and upload subsequent updates to PyPi
@@ -51,7 +55,11 @@ rm dist/*
 python3 setup.py sdist bdist_wheel
 twine check dist/*
 
-twine upload dist/*
+# For test / pre-release
+twine upload -r testpypi dist/*
+
+# For production
+twine upload -r pypi dist/*
 ```
 
 ---
