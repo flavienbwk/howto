@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Python Coding Style : Black](https://img.shields.io/badge/code%20style-black-000000.svg)
 
-The Howto command line allows you to design or play tutorials, guides or even stories in your shell.
+Howto is a useful tool to design and play tutorials, guides or even stories in your shell.
 
 ## Install
 

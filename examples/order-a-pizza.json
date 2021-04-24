@@ -1,14 +1,7 @@
 {
-	"name": "Order a pizza",
-	"description": "A walkthrough to ordering a pizza !",
+	"name": "order-a-pizza",
+	"description": "Steps to order a pizza",
 	"author": "flavienbwk",
-	"style": {
-		"questionmark": "#E91E63 bold",
-		"selected": "#673AB7 bold",
-		"instruction": "",
-		"answer": "#2196f3 bold",
-		"question": ""
-	},
 	"scenario": [
 		{
 			"type": "input",
@@ -17,7 +10,7 @@
 		},
 		{
 			"clear": true,
-			"markdown": "./pizza-introduction.md",
+			"markdown": "./order-a-pizza-introduction.md",
 			"type": "confirm",
 			"name": "toBeDelivered",
 			"message": "Is this for delivery?",
