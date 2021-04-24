@@ -17,11 +17,6 @@
 			"clear": true,
 			"markdown": "./publish-python-package/STEP2.md",
 			"prompt": "Press any key to continue..."
-		},
-		{
-			"clear": true,
-			"markdown": "./publish-python-package/STEP3.md",
-			"prompt": "Press any key to continue..."
 		}
 	]
 }
