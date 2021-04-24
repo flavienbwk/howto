@@ -32,3 +32,20 @@ optional arguments:
 The easiest way of creating your scenario is to get inspired by [examples](./examples).
 
 Most of prompts are based on the [PyInquirer library](https://github.com/CITGuru/PyInquirer). Howto adds the JSON-config feature and several [addons](./cli/howto/addons.py) such as _markdown_ support.
+
+## TODOs
+
+- [ ] Make it possible to save howtos to run them without specifying a scenario file path
+
+  Let's say you have a `my-story.json` scenario file. Let's save it.
+
+  ```bash
+  howto --load ./my-story.json
+  ```
+
+  Now, anywhere on your computer, you can run :
+
+  ```bash
+  howto my-story
+  # instead of `howto ./my-story.json`
+  ```
