@@ -1,0 +1,22 @@
+{
+	"name": "publish-python-package",
+	"description": "A walkthrough to publishing your Python package on PyPi.org (and a reminder for me)",
+	"author": "flavienbwk",
+	"scenario": [
+		{
+			"clear": true,
+			"markdown": "./publish-python-package/INTRODUCTION.md",
+			"prompt": "Press any key to continue..."
+		},
+		{
+			"clear": true,
+			"markdown": "./publish-python-package/STEP1.md",
+			"prompt": "Press any key to continue..."
+		},
+		{
+			"clear": true,
+			"markdown": "./publish-python-package/STEP2.md",
+			"prompt": "Press any key to continue..."
+		}
+	]
+}
