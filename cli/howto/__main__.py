@@ -1,4 +1,3 @@
-import howto
 import sys
 import warnings
 import argparse
@@ -7,8 +6,10 @@ import pkg_resources
 import logging
 from logging import DEBUG, INFO, WARNING
 
-from . import logger
+import howto
+from . import logger_utils
 
+version = pkg_resources.require("howto-cli")[0].version
 logger = logging.getLogger("HOWTO")
 
 
@@ -16,10 +17,12 @@ def parse_options(args=None, values=None):
     """
     Define and parse `optparse` options for command-line usage.
     """
+
     parser = argparse.ArgumentParser(
-        description="Multi-scenarios CLI tool for tutorials, guides or stories. More help at : https://github.com/flavienbwk/howto."
+        description="Multi-scenarios CLI tool for tutorials, guides or stories. More help at : https://github.com/flavienbwk/howto"
     )
     parser.add_argument("file", type=str, help="JSON scenario file path")
+    parser.add_argument("--version", action="version", version="%(prog)s " + version)
     parser.add_argument(
         "-v",
         "--verbose",
@@ -27,7 +30,7 @@ def parse_options(args=None, values=None):
         const=DEBUG,
         dest="verbosity",
         default=INFO,
-        help="Print all operations.",
+        help="print debug operations",
     )
     args = parser.parse_args()
 
@@ -55,8 +58,7 @@ def run():
         warn_logger.addHandler(console_handler)
 
     # Welcome message
-    version = pkg_resources.require("howto-cli")[0].version
-    logger.info(f"Welcome to howto {version} !")
+    logger.debug(f"Welcome to Howto {version} !")
 
     # Run
     howto.howtoFromFile(**options)

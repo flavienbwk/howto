@@ -1,0 +1,27 @@
+{
+	"name": "simple-markdown",
+	"description": "Example for markdown-replacable variables",
+	"author": "flavienbwk",
+	"style": {
+		"questionmark": "#E91E63 bold",
+		"selected": "#673AB7 bold",
+		"instruction": "",
+		"answer": "#2196f3 bold",
+		"question": ""
+	},
+	"scenario": [
+		{
+			"clear": true,
+			"type": "input",
+			"name": "first_name",
+			"message": "What's your first name ?"
+		},
+		{
+			"clear": true,
+			"markdown": "./WELCOME.md",
+			"type": "confirm",
+			"name": "markdown",
+			"message": "Press any key to quit..."
+		}
+	]
+}

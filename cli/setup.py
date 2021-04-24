@@ -18,6 +18,7 @@ setup(
     packages=['howto'],
     author="flavienbwk",
     license="MIT",
+    package_data={'': ['*.md']},
     include_package_data=True,
     install_requires=install_reqs,
     entry_points={"console_scripts": ["howto=howto.__main__:run"]},

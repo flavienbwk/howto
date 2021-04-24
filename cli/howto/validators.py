@@ -1,7 +1,6 @@
 import regex
 from prompt_toolkit.validation import Validator, ValidationError
 
-
 class PhoneNumberValidator(Validator):
     def validate(self, document):
         ok = regex.match(
