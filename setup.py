@@ -23,7 +23,8 @@ def parse_requirements(filename):
 install_reqs = parse_requirements("requirements.txt")
 setup(
     name="howto-cli",
-    version="0.0.3",
+    description="Multi-scenarios CLI tool for tutorials, guides or stories.",
+    version="0.0.4",
     packages=["howto"],
     author="flavienbwk",
     license="MIT",

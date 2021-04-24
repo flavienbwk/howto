@@ -1,6 +1,6 @@
 # howto
 
-[![Travis build](https://travis-ci.com/flavienbwk/howto.svg?branch=master)](https://travis-ci.com/flavienbwk/howto)
+[![Travis build](https://travis-ci.com/flavienbwk/howto.svg?branch=main)](https://travis-ci.com/flavienbwk/howto)
 [![PyPI version](https://badge.fury.io/py/howto-cli.svg)](https://badge.fury.io/py/howto-cli)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Python Coding Style : Black](https://img.shields.io/badge/code%20style-black-000000.svg)
