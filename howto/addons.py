@@ -5,6 +5,8 @@ import logging
 from rich.console import Console
 from rich.markdown import Markdown
 
+from . import utils
+
 logger = logging.getLogger("HOWTO")
 
 
@@ -18,14 +20,7 @@ def markdown(howto, all_answers: dict, scenario_item: dict, use_parent=True):
     console = Console()
     with open(markdown_path) as readme:
         text = readme.read()
-    # Replacing variables
-    for match in re.findall(r"\{\{(.*)\}\}", text):
-        if match in all_answers:
-            text = text.replace("{{" + match + "}}", all_answers[match])
-        else:
-            logger.debug(
-                f"addons.markdown: Variable {match} not found for {markdown_path}"
-            )
+    text = utils.replace_variables(text, all_answers)
     console.print(Markdown(text))
 
 
@@ -33,5 +28,12 @@ def clear(howto, all_answers: dict, scenario_item: dict):
     os.system("clear")
 
 
+def prompt(howto, all_answers: dict, scenario_item: dict):
+    input(scenario_item["prompt"])
+
+
 # Exposed addons for JSON configuration
-ADDONS = {"clear": clear, "markdown": markdown}
+ADDONS = {"clear": clear, "markdown": markdown, "prompt": prompt}
+
+# Addons that won't pass the hand to PyInquirer
+SKIP_ON_FINISH_ADDONS = ["prompt"]

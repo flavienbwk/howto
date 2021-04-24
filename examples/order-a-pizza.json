@@ -1,6 +1,6 @@
 {
-	"name": "use-howto",
-	"description": "A guide on how to use howto !",
+	"name": "Order a pizza",
+	"description": "A walkthrough to ordering a pizza !",
 	"author": "flavienbwk",
 	"style": {
 		"questionmark": "#E91E63 bold",
@@ -11,8 +11,13 @@
 	},
 	"scenario": [
 		{
+			"type": "input",
+			"name": "first_name",
+			"message": "What's your first name ?"
+		},
+		{
 			"clear": true,
-			"markdown": "./WELCOME.md",
+			"markdown": "./pizza-introduction.md",
 			"type": "confirm",
 			"name": "toBeDelivered",
 			"message": "Is this for delivery?",
@@ -21,7 +26,7 @@
 		{
 			"type": "input",
 			"name": "phone",
-			"message": "What\"s your phone number?",
+			"message": "What's your phone number?",
 			"validate": "validators.PhoneNumberValidator"
 		},
 		{
@@ -69,7 +74,7 @@
 		{
 			"type": "input",
 			"name": "comments",
-			"message": "Any comments on your purchase experience?",
+			"message": "Any comments on your experience?",
 			"default": "Nope, all good!"
 		},
 		{
@@ -80,16 +85,7 @@
 			"when": "lambda answers: answers[\"comments\"] != \"Nope, all good!\""
 		},
 		{
-			"type": "input",
-			"name": "first_name",
-			"message": "What\"s your first name"
-		},
-		{
-			"type": "input",
-			"name": "last_name",
-			"message": "What\"s your last name",
-			"default": "I am a default value !",
-			"validate": "lambda val: val == \"Doe\" or \"is your last name Doe?\""
+			"prompt": "Thanks for your order {{first_name}}."
 		}
 	]
 }

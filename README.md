@@ -31,4 +31,4 @@ optional arguments:
 
 The easiest way of creating your scenario is to get inspired by [examples](./examples).
 
-Most of prompts are working through the [PyInquirer library](https://github.com/CITGuru/PyInquirer). Howto adds the JSON-config feature and several [addons](./cli/howto/addons.py) such as _markdown_ support.
+Most of prompts are based on the [PyInquirer library](https://github.com/CITGuru/PyInquirer). Howto adds the JSON-config feature and several [addons](./cli/howto/addons.py) such as _markdown_ support.

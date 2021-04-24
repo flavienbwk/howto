@@ -18,10 +18,8 @@
 		},
 		{
 			"clear": true,
-			"markdown": "./WELCOME.md",
-			"type": "confirm",
-			"name": "markdown",
-			"message": "Press any key to quit..."
+			"markdown": "./simple-markdown-introduction.md",
+			"prompt": "Press any key to continue, {{first_name}}..."
 		}
 	]
 }

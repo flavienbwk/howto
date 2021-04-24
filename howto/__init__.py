@@ -4,10 +4,10 @@ import signal
 import logging
 import traceback
 from pathlib import Path
-from pprint import pprint
 
 from PyInquirer import prompt, style_from_dict
-from . import utils, validators, addons
+from . import utils, addons
+from . import validators  # used for validating prompts
 
 logger = logging.getLogger("HOWTO")
 
@@ -78,16 +78,30 @@ class Howto:
     def run_scenario(self):
         all_answers = {}
         for i, item in enumerate(self.scenario["scenario"]):
+            # Replace each scenario item properties using variables ("prompt", "message"...)
+            self.scenario["scenario"][i] = utils.format_item_variables(
+                item, all_answers
+            )
+
+            # Running addons
+            skip_prompt = False
             for addon in addons.ADDONS:
                 if addon in item.keys():
                     addons.ADDONS[addon](self, all_answers, item)
+                    if addon in addons.SKIP_ON_FINISH_ADDONS:
+                        skip_prompt = True
                     del self.scenario["scenario"][i][addon]
+            if skip_prompt:
+                continue
+
+            # Run next prompt
             answers = prompt(
                 questions=[self.scenario["scenario"][i]],
                 answers=all_answers,
                 # TODO(flavienbwk) Fix : style=style_from_dict(self.scenario["style"])
             )
             logger.debug(answers)
+
             # Handling CTRL+C (https://github.com/CITGuru/PyInquirer/issues/6)
             if not answers:
                 signal_handler(signal.SIGINT, None)

@@ -19,7 +19,8 @@ def parse_options(args=None, values=None):
     """
 
     parser = argparse.ArgumentParser(
-        description="Multi-scenarios CLI tool for tutorials, guides or stories. More help at : https://github.com/flavienbwk/howto"
+        description="Multi-scenarios CLI tool for tutorials, guides or stories.\
+        More help at : https://github.com/flavienbwk/howto"
     )
     parser.add_argument("file", type=str, help="JSON scenario file path")
     parser.add_argument("--version", action="version", version="%(prog)s " + version)
