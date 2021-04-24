@@ -1,37 +1,80 @@
 {
-    "name": "use-howto",
-    "version": "0.0.1",
-    "scenario": {
-        "introduction": {
-            "text": "What _are_ you **doing** ?",
-            "choices": [
-                {
-                    "value": "Doing math!",
-                    "jumpto": "doing_math"
-                },
-                {
-                    "value": "Playing video games...",
-                    "jumpto": "playing_video_games"
-                }
-            ]
-        },
-        "doing_math": {
-            "text": "That's very good !",
-            "commands": [
-                [ "sleep", "6" ]
-            ]
-        },
-        "playing_video_games": {
-            "text": "Bad boy !",
-            "commands": [
-                [ "sleep", "3" ]
-            ]
-        },
-        "quit": {
-            "text": "Goodbye",
-            "commands": [
-                [ "exit" ]
-            ]
-        }
-    }
+	"name": "use-howto",
+	"version": "0.0.1",
+	"style": {
+		"questionmark": "#E91E63 bold",
+		"selected": "#673AB7 bold",
+		"instruction": "",
+		"answer": "#2196f3 bold",
+		"question": ""
+	},
+	"scenario": [
+		{
+			"type": "confirm",
+			"name": "toBeDelivered",
+			"message": "Is this for delivery?",
+			"default": false
+		},
+		{
+			"type": "input",
+			"name": "phone",
+			"message": "What\"s your phone number?",
+			"validate": "PhoneNumberValidator"
+		},
+		{
+			"type": "list",
+			"name": "size",
+			"message": "What size do you need?",
+			"choices": [ "Large", "Medium", "Small" ],
+			"filter": "lambda val: val.lower()"
+		},
+		{
+			"type": "input",
+			"name": "quantity",
+			"message": "How many do you need?",
+			"validate": "NumberValidator",
+			"filter": "lambda val: int(val)"
+		},
+		{
+			"type": "expand",
+			"name": "toppings",
+			"message": "What about the toppings?",
+			"choices": [
+				{
+					"key": "p",
+					"name": "Pepperoni and cheese",
+					"value": "PepperoniCheese"
+				},
+				{
+					"key": "a",
+					"name": "All dressed",
+					"value": "alldressed"
+				},
+				{
+					"key": "w",
+					"name": "Hawaiian",
+					"value": "hawaiian"
+				}
+			]
+		},
+		{
+			"type": "rawlist",
+			"name": "beverage",
+			"message": "You also get a free 2L beverage",
+			"choices": [ "Pepsi", "7up", "Coke" ]
+		},
+		{
+			"type": "input",
+			"name": "comments",
+			"message": "Any comments on your purchase experience?",
+			"default": "Nope, all good!"
+		},
+		{
+			"type": "list",
+			"name": "prize",
+			"message": "For leaving a comment, you get a freebie",
+			"choices": [ "cake", "fries" ],
+			"when": "lambda answers: answers[\"comments\"] != \"Nope, all good!\""
+		}
+	]
 }

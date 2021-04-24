@@ -7,6 +7,8 @@ import pkg_resources
 import logging
 from logging import DEBUG, INFO, WARNING
 
+from . import logger
+
 logger = logging.getLogger("HOWTO")
 
 
@@ -17,7 +19,7 @@ def parse_options(args=None, values=None):
     parser = argparse.ArgumentParser(
         description="Multi-scenarios CLI tool for tutorials, guides or stories. More help at : https://github.com/flavienbwk/howto."
     )
-    parser.add_argument("f", type=str, help="JSON scenario file path")
+    parser.add_argument("file", type=str, help="JSON scenario file path")
     parser.add_argument(
         "-v",
         "--verbose",
@@ -29,15 +31,13 @@ def parse_options(args=None, values=None):
     )
     args = parser.parse_args()
 
-    parameters = {"scenario_path": args.f}
+    parameters = {"scenario_path": args.file}
 
     return parameters, args.verbosity
 
 
 def run():
     """Run howto from the command line."""
-    version = pkg_resources.require("howto-cli")[0].version
-    logger.info(f"Welcome to howto {version} !")
 
     # Parse options and adjust logging level if necessary
     options, logging_level = parse_options()
@@ -45,6 +45,7 @@ def run():
         sys.exit(2)
     logger.setLevel(logging_level)
     console_handler = logging.StreamHandler()
+    console_handler.setFormatter(logger_utils.Formatter())
     logger.addHandler(console_handler)
     if logging_level <= WARNING:
         # Ensure deprecation warnings get displayed
@@ -52,6 +53,10 @@ def run():
         logging.captureWarnings(True)
         warn_logger = logging.getLogger("py.warnings")
         warn_logger.addHandler(console_handler)
+
+    # Welcome message
+    version = pkg_resources.require("howto-cli")[0].version
+    logger.info(f"Welcome to howto {version} !")
 
     # Run
     howto.howtoFromFile(**options)
