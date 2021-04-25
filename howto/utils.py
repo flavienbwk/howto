@@ -29,5 +29,6 @@ def replace_variables(text: str, variables: dict):
 
     for match in re.findall(r"\{\{(.*)\}\}", text):
         if match in variables:
-            text = text.replace("{{" + match + "}}", variables[match])
+            replacement = str(variables[match])
+            text = text.replace("{{" + match + "}}", replacement)
     return text
