@@ -4,13 +4,13 @@
 	"author": "flavienbwk",
 	"scenario": [
 		{
+			"clear": true,
+			"markdown": "./order-a-pizza/INTRODUCTION.md",
 			"type": "input",
 			"name": "first_name",
 			"message": "What's your first name ?"
 		},
 		{
-			"clear": true,
-			"markdown": "./order-a-pizza-introduction.md",
 			"type": "confirm",
 			"name": "toBeDelivered",
 			"message": "Is this for delivery?",
@@ -78,6 +78,9 @@
 			"when": "lambda answers: answers[\"comments\"] != \"Nope, all good!\""
 		},
 		{
+			"clear": true,
+			"name": "summary",
+			"markdown": "./order-a-pizza/SUMMARY.md",
 			"prompt": "Thanks for your order {{first_name}}."
 		}
 	]

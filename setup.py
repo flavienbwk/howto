@@ -24,7 +24,7 @@ install_reqs = parse_requirements("requirements.txt")
 setup(
     name="howto-cli",
     description="Multi-scenarios CLI tool for tutorials, guides or stories.",
-    version="0.0.4",
+    version="0.0.5",
     packages=["howto"],
     author="flavienbwk",
     license="MIT",
