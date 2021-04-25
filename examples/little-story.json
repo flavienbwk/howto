@@ -1,0 +1,58 @@
+{
+	"name": "little-story",
+	"description": "A simple story to illustrate classic and conditional jumps",
+	"author": "flavienbwk",
+	"scenario": [
+		{
+			"clear": true,
+			"type": "input",
+			"name": "first_name",
+			"message": "What's your first name ?",
+			"validate": "validators.NotEmpty"
+		},
+		{
+			"clear": true,
+			"type": "list",
+			"name": "genre",
+			"message": "Who do you want your character to be, {{first_name}} ?",
+			"choices": [ "Man", "Woman" ],
+			"filter": "lambda val: val.lower().strip()",
+			"validate": "validators.NotEmpty",
+			"jump": {
+				"man": "man_story",
+				"woman": "woman_story"
+			}
+		},
+		{
+			"clear": true,
+			"name": "man_story",
+			"markdown": "./little-story/MAN.md",
+			"prompt": "Press any key to continue...",
+            "jump": "restart_choice"
+		},
+		{
+			"clear": true,
+			"name": "woman_story",
+			"markdown": "./little-story/WOMAN.md",
+			"prompt": "Press any key to continue...",
+            "jump": "restart_choice"
+		},
+		{
+			"clear": true,
+			"type": "list",
+			"name": "restart_choice",
+			"message": "What do you want to do now, {{first_name}} ?",
+			"choices": [ "New character", "Next" ],
+			"filter": "lambda val: val.lower()",
+			"jump": {
+				"new character": "genre"
+			}
+		},
+		{
+			"clear": true,
+			"name": "end_story",
+			"markdown": "./little-story/END.md",
+			"prompt": "Press any key to end..."
+		}
+	]
+}

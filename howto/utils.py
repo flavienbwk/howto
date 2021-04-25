@@ -1,12 +1,17 @@
 import re
 import json
 
+def format_steps_by_name(scenario: list):
+    steps = {}
+    for step in scenario:
+        steps[step["name"]] = step
+    return steps
 
-def format_item_variables(item: dict, variables: dict):
-    for key in item.keys():
+def format_step_variables(step: dict, variables: dict):
+    for key in step.keys():
         if key in ["message", "prompt"]:
-            item[key] = replace_variables(item[key], variables)
-    return item
+            step[key] = replace_variables(step[key], variables)
+    return step
 
 
 def load_json_file(json_file_path):

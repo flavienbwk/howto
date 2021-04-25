@@ -11,6 +11,7 @@
 		},
 		{
 			"clear": true,
+			"name": "introduction",
 			"markdown": "./simple-markdown-introduction.md",
 			"prompt": "Press any key to continue, {{first_name}}..."
 		}

@@ -22,3 +22,11 @@ class NumberValidator(Validator):
             raise ValidationError(
                 message="Please enter a number", cursor_position=len(document.text)
             )  # Move cursor to end
+
+
+class NotEmpty(Validator):
+    def validate(self, document):
+        if not document.text:
+            raise ValidationError(
+                message="Please enter something", cursor_position=len(document.text)
+            )  # Move cursor to end

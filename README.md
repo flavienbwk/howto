@@ -1,6 +1,6 @@
 # howto
 
-[![Travis build](https://travis-ci.com/flavienbwk/howto.svg?branch=master)](https://travis-ci.com/flavienbwk/howto)
+[![Travis build](https://travis-ci.com/flavienbwk/howto.svg?branch=main)](https://travis-ci.com/flavienbwk/howto)
 [![PyPI version](https://badge.fury.io/py/howto-cli.svg)](https://badge.fury.io/py/howto-cli)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Python Coding Style : Black](https://img.shields.io/badge/code%20style-black-000000.svg)
@@ -15,8 +15,8 @@ pip3 install howto-cli
 
 ## Usage
 
-```bash
-howto [-h] [-v] file
+```help
+usage: howto [-h] [--version] [-v] file
 
 Multi-scenarios CLI tool for tutorials, guides or stories.
 
@@ -25,7 +25,8 @@ positional arguments:
 
 optional arguments:
   -h, --help     show this help message and exit
-  -v, --verbose  print debug operations
+  --version      show program's version number and exit
+  -v, --verbose  print debug operation
 ```
 
 ## Creating a scenario
@@ -38,15 +39,15 @@ Most of prompts are based on the [PyInquirer library](https://github.com/CITGuru
 
 - [ ] Make it possible to save howtos to run them without specifying a scenario file path
 
-  Let's say you have a `my-story.json` scenario file. Let's save it.
+  Let's say you have a `cook-a-cake.json` scenario file. Let's save it.
 
   ```bash
-  howto --load ./my-story.json
+  howto --load ./cook-a-cake.json
   ```
 
   Now, anywhere on your computer, you can run :
 
   ```bash
-  howto my-story
-  # instead of `howto ./my-story.json`
+  howto cook-a-cake
+  # instead of `howto ./cook-a-cake.json`
   ```
