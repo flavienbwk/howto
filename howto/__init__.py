@@ -45,20 +45,26 @@ class Howto:
             self.scenario["author"] = "_Unknown_"
         if "scenario" not in self.scenario:
             raise Exception(f"No 'scenario' parameter was found in scenario")
+        if len(self.scenario["scenario"]) == 0:
+            raise Exception(f"No scenario steps were found")
         if not isinstance(self.scenario["scenario"], list):
             raise Exception(f"'scenario' parameter is not a list")
         logger.debug("Scenario file correctly formatted")
 
     def format_scenario(self):
         """Transcripts specific PyInquirer properties to Python code"""
-        for i, item in enumerate(self.scenario["scenario"]):
+        for i, step in enumerate(self.scenario["scenario"]):
+            if "name" not in step:
+                raise Exception(
+                    f"No 'name' found for step {i} in scenario {self.scenario['name']}"
+                )
             for filter in ["validate", "filter", "when"]:
-                if filter in item:
+                if filter in step:
                     try:
-                        self.scenario["scenario"][i][filter] = eval(item[filter])
+                        self.scenario["scenario"][i][filter] = eval(step[filter])
                     except Exception as e:
                         raise Exception(
-                            f"In scenario item {i} : '{filter}'' has invalid value {item[filter]} : \n{e}"
+                            f"In scenario step {i} : '{filter}'' has invalid value {step[filter]} : \n{e}"
                         )
 
     def run_introduction(self):
@@ -77,35 +83,56 @@ class Howto:
 
     def run_scenario(self):
         all_answers = {}
-        for i, item in enumerate(self.scenario["scenario"]):
-            # Replace each scenario item properties using variables ("prompt", "message"...)
-            self.scenario["scenario"][i] = utils.format_item_variables(
-                item, all_answers
-            )
+        steps = utils.format_steps_by_name(self.scenario["scenario"])
+        stack = [name for name, _ in steps.items()]
+
+        while len(stack):
+            step_name = stack[0]
+            step = steps[step_name].copy()
+            logger.debug(f"Running step {step_name}")
+
+            # Replace each scenario step properties using variables ("prompt", "message"...)
+            step = utils.format_step_variables(step, all_answers)
 
             # Running addons
             skip_prompt = False
             for addon in addons.ADDONS:
-                if addon in item.keys():
-                    addons.ADDONS[addon](self, all_answers, item)
+                if addon in step.keys():
+                    addons.ADDONS[addon](self, all_answers, step)
                     if addon in addons.SKIP_ON_FINISH_ADDONS:
                         skip_prompt = True
-                    del self.scenario["scenario"][i][addon]
-            if skip_prompt:
-                continue
+                    del step[addon]
 
-            # Run next prompt
-            answers = prompt(
-                questions=[self.scenario["scenario"][i]],
-                answers=all_answers,
-                # TODO(flavienbwk) Fix : style=style_from_dict(self.scenario["style"])
-            )
-            logger.debug(answers)
+            if skip_prompt == False:
+                # Run next prompt
+                answers = prompt(questions=[step], answers=all_answers)
+                logger.debug(answers)
 
-            # Handling CTRL+C (https://github.com/CITGuru/PyInquirer/issues/6)
-            if not answers:
-                signal_handler(signal.SIGINT, None)
-            all_answers.update(answers)
+                # Handling CTRL+C (https://github.com/CITGuru/PyInquirer/issues/6)
+                if not answers:
+                    signal_handler(signal.SIGINT, None)
+
+                all_answers.update(answers)
+
+            # Pop current step
+            stack.pop(0)
+
+            # Process jumps and conditional jumps
+            if "jump" in step:
+                next_step = None
+                if isinstance(step["jump"], str):
+                    # Classic jumps
+                    next_step = step["jump"]
+                elif step_name in answers and str(answers[step_name]) in step["jump"]:
+                    # Conditional jumps (by value)
+                    next_step = step["jump"][str(answers[step_name])]
+                    # Removing other step choices : the chosen one will be inserted in stack
+                    for other_step in [value for _, value in step["jump"].items()]:
+                        if other_step in stack:
+                            stack.remove(other_step)
+                if next_step and stack[0] != next_step:
+                    stack.insert(0, next_step)
+
         logger.debug("Summary :")
         logger.debug(all_answers)
 

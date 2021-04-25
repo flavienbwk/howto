@@ -5,16 +5,19 @@
 	"scenario": [
 		{
 			"clear": true,
+			"name": "introduction",
 			"markdown": "./publish-python-package/INTRODUCTION.md",
 			"prompt": "Press any key to continue..."
 		},
 		{
 			"clear": true,
+			"name": "step1",
 			"markdown": "./publish-python-package/STEP1.md",
 			"prompt": "Press any key to continue..."
 		},
 		{
 			"clear": true,
+			"name": "step2",
 			"markdown": "./publish-python-package/STEP2.md",
 			"prompt": "Press any key to continue..."
 		}

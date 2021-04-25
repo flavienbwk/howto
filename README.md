@@ -38,15 +38,15 @@ Most of prompts are based on the [PyInquirer library](https://github.com/CITGuru
 
 - [ ] Make it possible to save howtos to run them without specifying a scenario file path
 
-  Let's say you have a `my-story.json` scenario file. Let's save it.
+  Let's say you have a `cook-a-cake.json` scenario file. Let's save it.
 
   ```bash
-  howto --load ./my-story.json
+  howto --load ./cook-a-cake.json
   ```
 
   Now, anywhere on your computer, you can run :
 
   ```bash
-  howto my-story
-  # instead of `howto ./my-story.json`
+  howto cook-a-cake
+  # instead of `howto ./cook-a-cake.json`
   ```
