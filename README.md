@@ -15,8 +15,8 @@ pip3 install howto-cli
 
 ## Usage
 
-```bash
-howto [-h] [-v] file
+```help
+usage: howto [-h] [--version] [-v] file
 
 Multi-scenarios CLI tool for tutorials, guides or stories.
 
@@ -25,7 +25,8 @@ positional arguments:
 
 optional arguments:
   -h, --help     show this help message and exit
-  -v, --verbose  print debug operations
+  --version      show program's version number and exit
+  -v, --verbose  print debug operation
 ```
 
 ## Creating a scenario
