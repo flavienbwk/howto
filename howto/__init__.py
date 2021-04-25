@@ -117,14 +117,14 @@ class Howto:
             # Pop current step
             stack.pop(0)
 
-            # Process jumps and conditional jumps
+            # Process direct and conditional jumps
             if "jump" in step:
                 next_step = None
                 if isinstance(step["jump"], str):
-                    # Classic jumps
+                    # Direct jumps
                     next_step = step["jump"]
                 elif step_name in answers and str(answers[step_name]) in step["jump"]:
-                    # Conditional jumps (by value)
+                    # Conditional jump (by value)
                     next_step = step["jump"][str(answers[step_name])]
                     # Removing other step choices : the chosen one will be inserted in stack
                     for other_step in [value for _, value in step["jump"].items()]:
