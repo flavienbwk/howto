@@ -7,6 +7,8 @@
 
 Howto is a useful tool to design and play tutorials, guides or even stories in your shell.
 
+![Howto example illustration](./illustration.gif)
+
 ## Install
 
 ```bash
