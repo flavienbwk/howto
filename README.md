@@ -13,6 +13,14 @@ Howto is a useful tool to design and play tutorials, guides or even stories in y
 pip3 install howto-cli
 ```
 
+## Try it !
+
+```bash
+pip3 install howto-cli
+git clone https://github.com/flavienbwk/howto && cd howto
+howto examples/order-a-pizza.json
+```
+
 ## Usage
 
 ```help
