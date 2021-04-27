@@ -47,8 +47,6 @@ Most of prompts are based on the [PyInquirer library](https://github.com/CITGuru
 
 ## TODOs
 
-- [ ] GIF for Howto presentation on pizza ordering
-
 - [ ] Make it possible to save howtos to run them without specifying a scenario file path
 
   Let's say you have a `cook-a-cake.json` scenario file. Let's save it.
